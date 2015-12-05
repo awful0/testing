@@ -1,0 +1,9 @@
+AddDefaultCharset UTF-8
+RewriteEngine on
+Options +FollowSymLinks 
+
+RewriteRule ^catalog/?$ index.php
+RewriteRule ^catalog/(\w+)/?$ index.php?cat=$1
+RewriteRule ^catalog/(\w+)/(\w+)/?$ index.php?cat=$1&prod=$2
+
+
