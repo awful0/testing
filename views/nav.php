@@ -1,0 +1,1 @@
+<div id="nav"><a class="nav" href='/'>На главную</a></div>
