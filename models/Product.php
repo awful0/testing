@@ -38,7 +38,7 @@ class Product {
 
 	public function showProduct($prod){
 		
-		$sql = 'SELECT * FROM ' .static::getTable() . ' WHERE Path=:prod';
+		$sql = 'SELECT Name, Descr FROM ' .static::getTable() . ' WHERE Path=:prod';
 		$db = new Db();
         	return $db->execute($sql, [':prod' => $prod]);
         
