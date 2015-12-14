@@ -18,34 +18,22 @@ class Product {
 		$db = new Db();
 
 		if ($cat && $cat == 'index'){
-			$sql = 'SELECT t1.Name, t2.Name, t2.id, t1.Path, t2.Path FROM 
-				(SELECT * FROM ' .static::getTable() . ' GROUP BY `Name`)  t1,
-				(SELECT * FROM ' .static::getTable() . ')  t2
-				WHERE t2.Parent=t1.id'
-			;
+
+				$sql = 'select t1.Name, t2.Name, t2.id, t1.Path, t2.Path from ' .static::getTable() . ' t1 inner join ' .static::getTable() . ' t2 on t1.id=t2.parent';
+			
 			return $db->execute($sql);
 		}
 
 		else if ($cat && !$prod){
 
-			$sql = 'SELECT t1.Name, t2.Name, t2.id, t1.Path, t2.Path FROM 
-				(SELECT * FROM ' .static::getTable() . ' 
-					WHERE Path=:cat)  t1,
-				(SELECT * FROM ' .static::getTable() . ')  t2
-				WHERE t2.Parent=t1.id'
-			;		
+			$sql = 'select t1.Name, t2.Name, t2.id, t1.Path, t2.Path from ' .static::getTable() . ' t1 inner join ' .static::getTable() . ' t2 on t1.id=t2.parent and t1.Path=:cat';
 			return $db->execute($sql, [':cat' => $cat]);
 		}
 
 		else if ($cat && $prod){
 
-			$sql = 'SELECT t1.Name, t2.Name, t2.id, t1.Path, t2.Path FROM 
-				(SELECT * FROM ' .static::getTable() . ' 
-					WHERE Path=:prod)  t1,
-				(SELECT * FROM ' .static::getTable() . ')  t2
-				WHERE t2.Parent=t1.id'
-			;	
-			
+			$sql = 'select t1.Name, t2.Name, t2.id, t1.Path, t2.Path from ' .static::getTable() . ' t1 inner join ' .static::getTable() . ' t2 on t1.id=t2.parent and t1.Path=:prod';
+
         	return $db->execute($sql, [':prod' => $prod]);
         }
         
