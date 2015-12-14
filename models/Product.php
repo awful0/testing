@@ -20,7 +20,6 @@ class Product {
 		if ($cat && $cat == 'index'){
 
 			$sql = 'select t1.Name, t2.Name, t2.id, t1.Path, t2.Path from ' .static::getTable() . ' t1 inner join ' .static::getTable() . ' t2 on t1.id=t2.parent';
-			
 			return $db->execute($sql);
 		}
 
@@ -33,8 +32,7 @@ class Product {
 		else if ($cat && $prod){
 
 			$sql = 'select t1.Name, t2.Name, t2.id, t1.Path, t2.Path from ' .static::getTable() . ' t1 inner join ' .static::getTable() . ' t2 on t1.id=t2.parent and t1.Path=:prod';
-
-        	return $db->execute($sql, [':prod' => $prod]);
+			return $db->execute($sql, [':prod' => $prod]);
         }
         
 	}
